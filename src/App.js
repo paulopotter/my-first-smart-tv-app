@@ -2,6 +2,22 @@ import React from "react";
 import jikanjs from "jikanjs";
 
 class App extends React.Component {
+
+    tmpl(anime){
+        const {image_url, title, mal_id, type} = anime
+
+        return (
+            <div id={mal_id} key={mal_id}>
+                <figure>
+                    <span>{type}</span>
+                    <img src={image_url} alt={title} />
+                    <p>{title}</p>
+                </figure>
+            </div>
+        )
+
+    }
+
     render() {
         jikanjs
         .loadSeasonLater()
