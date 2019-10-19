@@ -1,0 +1,6 @@
+/coverage/**
+*.test.js
+!.eslintrc.js
+src/setupTests.js
+jest.config.js
+src/serviceWorker.js

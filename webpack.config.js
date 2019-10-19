@@ -1,8 +1,8 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-let config = {
+const config = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
@@ -11,25 +11,25 @@ let config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
-      minify: false
+      minify: false,
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles.css'
-    })
+      filename: 'styles.css',
+    }),
   ],
   module: {
     rules: [{
       test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'babel-loader'
-    },{
+      loader: 'babel-loader',
+    }, {
       test: /\.(sa|sc|c)ss$/,
       use: [
         MiniCssExtractPlugin.loader,
         'css-loader',
-        'sass-loader'
-      ]
-    }]
-  }
-};
-module.exports = config;
+        'sass-loader',
+      ],
+    }],
+  },
+}
+module.exports = config
