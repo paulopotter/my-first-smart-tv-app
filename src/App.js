@@ -1,5 +1,8 @@
+/* eslint-disable camelcase */
 import React from 'react'
 import jikanjs from 'jikanjs'
+
+import './App.css'
 
 class App extends React.Component {
   constructor(props) {
@@ -18,20 +21,20 @@ class App extends React.Component {
           animes.push(element)
         })
         this.setState({ animes })
-      }).catch((err) => {
+      })
+      .catch((err) => {
         window.console.error(err) // in case a error happens
       })
   }
 
   tmpl(anime) {
     const {
-      image_url, title, mal_id, type,
+      image_url, title, mal_id
     } = anime
 
     return (
-      <div id={mal_id} key={mal_id}>
+      <div className="poster-wrapper" id={mal_id} key={mal_id}>
         <figure>
-          <span>{type}</span>
           <img src={image_url} alt={title} />
           <p>{title}</p>
         </figure>
@@ -41,9 +44,8 @@ class App extends React.Component {
 
   render() {
     const { animes } = this.state
-    return animes.map((anime) => this.tmpl(anime))
+    return animes.map((anime) => anime.type == 'TV' ? this.tmpl(anime) : null)
   }
 }
-
 
 export default App
