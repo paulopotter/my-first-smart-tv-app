@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import React from 'react'
 import jikanjs from 'jikanjs'
 
@@ -45,7 +44,6 @@ class App extends React.Component {
 
   onKeyDown(e) {
     const { activeItem, animes } = this.state
-    console.log('->', animes.length)
     let newActiveItem = activeItem
     switch (e.keyCode) {
       case 37: // left
@@ -87,7 +85,11 @@ class App extends React.Component {
   }
 
   tmpl(anime, i) {
-    const { image_url, title, mal_id } = anime
+    const {
+      image_url: imgUrl,
+      title,
+      mal_id: malId,
+    } = anime
     const { activeItem } = this.state
 
     return (
@@ -95,11 +97,11 @@ class App extends React.Component {
         className={`poster-wrapper ${
           activeItem === i ? 'poster-wrapper--active' : null
         }`}
-        id={mal_id}
-        key={mal_id}
+        id={malId}
+        key={malId}
       >
         <figure>
-          <img src={image_url} alt={title} />
+          <img src={imgUrl} alt={title} />
           <p>{title}</p>
         </figure>
       </div>
@@ -108,10 +110,7 @@ class App extends React.Component {
 
   render() {
     const { animes } = this.state
-    console.log( this.state.activeItem )
-    return animes.map((anime, i) =>
-      anime.type === 'TV' ? this.tmpl(anime, i) : null
-    )
+    return animes.map((anime, i) => (anime.type === 'TV' ? this.tmpl(anime, i) : null))
   }
 }
 
