@@ -19,7 +19,9 @@ class App extends React.Component {
       .loadSeasonLater()
       .then(response => {
         response.anime.forEach(element => {
-          animes.push(element)
+          if (element.type === 'TV') {
+            animes.push(element)
+          }
         })
         this.setState({ animes })
       })
@@ -53,7 +55,8 @@ class App extends React.Component {
         break
 
       case 39: // right
-        if (activeItem < animes.length) {
+        if (activeItem < animes.length
+          && activeItem + 1 < animes.length) {
           newActiveItem += 1
         }
         break
@@ -61,7 +64,7 @@ class App extends React.Component {
       case 40: // down
         if (activeItem < animes.length) {
           if (activeItem + 4 > animes.length) {
-            newActiveItem = animes.length
+            newActiveItem = animes.length - 1
           } else {
             newActiveItem += 4
           }
@@ -110,7 +113,7 @@ class App extends React.Component {
 
   render() {
     const { animes } = this.state
-    return animes.map((anime, i) => (anime.type === 'TV' ? this.tmpl(anime, i) : null))
+    return animes.map((anime, i) => this.tmpl(anime, i))
   }
 }
 
