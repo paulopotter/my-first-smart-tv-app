@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import jikanjs from 'jikanjs'
 
 import './App.css'
 
-class App extends React.Component {
+export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,21 +14,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const animes = []
-    jikanjs
-      .loadSeasonLater()
-      .then(response => {
-        response.anime.forEach(element => {
-          if (element.type === 'TV') {
-            animes.push(element)
-          }
-        })
-        this.setState({ animes })
-      })
-      .catch(err => {
-        window.console.error(err) // in case a error happens
-      })
-
+    this.getData()
     this.enableKeyEvent()
   }
 
@@ -87,6 +73,23 @@ class App extends React.Component {
     })
   }
 
+  async getData() {
+    const animes = []
+    await jikanjs
+      .loadSeasonLater()
+      .then(response => {
+        response.anime.forEach(element => {
+          if (element.type === 'TV') {
+            animes.push(element)
+          }
+        })
+        this.setState({ animes })
+      })
+      .catch(err => {
+        window.console.error(err) // in case an error happens
+      })
+  }
+
   tmpl(anime, i) {
     const {
       image_url: imgUrl,
@@ -116,5 +119,3 @@ class App extends React.Component {
     return animes.map((anime, i) => this.tmpl(anime, i))
   }
 }
-
-export default App
