@@ -6,7 +6,7 @@ const Animes = [
     title: 'Yakusoku no Neverland 2nd Season',
     image_url: 'https://cdn.myanimelist.net/images/anime/1708/104922.jpg?s=4cdb0b349706bb17869c3e385cfd3978',
     synopsis: 'Second season of Yakusoku no Neverland.',
-    type: 'TV',
+    type: 'MANGA',
     airing_start: null,
     episodes: null,
     members: 102247,
