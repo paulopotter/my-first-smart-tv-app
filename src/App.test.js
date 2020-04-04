@@ -35,6 +35,15 @@ describe('App', () => {
     expect(component.state('animes').length).toEqual(12)
   })
 
+  it('should disable navigation when unmount', () => {
+      const component = mount(<App />)
+
+      const spy = jest.spyOn(component.instance(), 'disableKeyEvent')
+      component.instance().componentWillUnmount()
+      component.update()
+      expect(spy).toHaveBeenCalled()
+    })
+
   describe('Navigation', () => {
     it('Shouldn`t navigate up when first item was focused', async () => {
       const component = mount(<App />)
