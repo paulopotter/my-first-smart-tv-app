@@ -9,6 +9,7 @@ export default class App extends Component {
     this.state = {
       animes: [],
       activeItem: 0,
+      wrapperStyle: { marginTop: 0 }
     }
     this.onKeyDown = this.onKeyDown.bind(this)
   }
@@ -53,6 +54,7 @@ export default class App extends Component {
             newActiveItem = animes.length - 1
           } else {
             newActiveItem += 4
+            this.animate(40)
           }
         }
         break
@@ -62,6 +64,7 @@ export default class App extends Component {
             newActiveItem = 0
           } else {
             newActiveItem -= 4
+            this.animate(38)
           }
         }
         break
@@ -71,6 +74,24 @@ export default class App extends Component {
     this.setState({
       activeItem: newActiveItem
     })
+  }
+
+  animate(keyCode) {
+    if (keyCode === 40) {
+      this.setState(prevState => ({
+        wrapperStyle: {
+          marginTop: `${parseInt(prevState.wrapperStyle.marginTop, 10) - 390}px`,
+        }
+      }))
+    }
+
+    if (keyCode === 38) {
+      this.setState(prevState => ({
+        wrapperStyle: {
+          marginTop: `${parseInt(prevState.wrapperStyle.marginTop, 10) + 390}px`,
+        }
+      }))
+    }
   }
 
   async getData() {
@@ -101,21 +122,30 @@ export default class App extends Component {
     return (
       <div
         className={`poster-wrapper ${
-          activeItem === i ? 'poster-wrapper--active' : null
+          activeItem === i ? 'poster-wrapper--active' : ''
         }`}
         id={malId}
         key={malId}
       >
         <figure>
           <img src={imgUrl} alt={title} />
-          <p>{title}</p>
+          <span>{title}</span>
         </figure>
       </div>
     )
   }
 
   render() {
-    const { animes } = this.state
-    return animes.map((anime, i) => this.tmpl(anime, i))
+    const {
+      animes,
+      wrapperStyle,
+    } = this.state
+    return (
+      <div className="wrapper" style={wrapperStyle}>
+        {
+          animes.map((anime, i) => this.tmpl(anime, i))
+        }
+      </div>
+    )
   }
 }
