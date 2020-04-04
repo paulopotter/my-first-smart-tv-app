@@ -5,10 +5,38 @@ body {
 
 .poster-wrapper {
   display: inline-block;
-  width: 310px;
+  height: 390px;
   text-align: center;
+  vertical-align: bottom;
+  width: 310px;
 }
 
-.poster-wrapper--active {
-  outline: 1px solid #f1f1f1;
+.poster-wrapper figure {
+  position: relative;
+}
+
+.poster-wrapper img {
+  height: 321px;
+  width: 225px;
+}
+
+.poster-wrapper--active img{
+  height: 381px;
+  width: 285px;
+}
+
+.poster-wrapper span {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  min-height: 15%;
+  padding: 15px 10px;
+  font-size: 20px;
+}
+
+.poster-wrapper--active span {
+  display: inline;
 }
